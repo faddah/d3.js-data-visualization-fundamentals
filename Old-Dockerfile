@@ -1,0 +1,27 @@
+# Create a Docker file that pulls from the latest minimal Alpine with the latest NGINX image
+# and have this current project directory be synced to the html directory on the NGINX server on the container
+
+# Please re-write the Dockerfile so that changes made to this local project directory are made
+# at the same time to the WORKDIR on the NGINX server and also to ensure the Dockerfile is minimal and efficient
+# Use the latest NGINX image based on Alpine
+FROM nginx:latest
+LABEL maintainer="Faddah Wolf" \
+    version="1.0" \
+    description="Minimal NGINX server serving current project directory"
+# Set the working directory to the NGINX html directory
+WORKDIR /usr/share/nginx/html
+# Copy the current project directory to the NGINX html directory
+COPY . .
+# Expose port 80 for the NGINX server
+EXPOSE 80
+# Add a health check to ensure the NGINX server is running
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost/ || exit 1
+# Define a volume for the NGINX html directory to allow syncing with the local project directory
+VOLUME ["/usr/share/nginx/html"]
+
+# Add a comment to the image
+# This Dockerfile creates a minimal NGINX server that serves the current project directory
+# It is based on the latest NGINX image and uses Alpine as the base image
+# The image exposes port 80 and has a health check to ensure the NGINX server is running
+# The image is maintained by Faddah Wolf and is version 1.0
