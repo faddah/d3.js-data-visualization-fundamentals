@@ -1,7 +1,7 @@
 import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7/+esm';
 const d3Data = document.querySelector('#d3-data');
 
-var w = 300;
+var w = 400;
 var h = 100;
 var padding = 5;
 var dataset = [5, 10, 14, 20, 25, 32];
